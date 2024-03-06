@@ -1499,7 +1499,7 @@ HTML emails."
     (org-msg--mu4e-fun-call "start"))
   (when mu4e-compose-complete-addresses
     (org-msg--mu4e-fun-call "compose-setup-completion"))
-  (add-hook 'before-save-hook (lambda () (mu4e--delimit-headers
+  (add-hook 'message-send-hook (lambda () (mu4e--delimit-headers
 					  'undelimit)) 0 t))
   ;(add-hook 'after-save-hook #'mu4e--delimit-headers 0 t))
   ;; the following code is verbatim from mu4e-compose.el, `mu4e-compose-mode'

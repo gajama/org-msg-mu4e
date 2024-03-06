@@ -1558,7 +1558,7 @@ Type \\[org-msg-attach] to call the dispatcher for attachment
 \\{org-msg-edit-mode-map}"
   (setq-local message-sent-message-via nil)
   (add-hook 'message-send-hook 'org-msg-prepare-to-send nil t)
-  (add-hook 'message-sent-hook 'undo t t)
+  ;(add-hook 'message-sent-hook 'undo t t)
   (add-hook 'completion-at-point-functions 'message-completion-function nil t)
   (cond ((message-mail-alias-type-p 'abbrev) (mail-abbrevs-setup))
 	((message-mail-alias-type-p 'ecomplete) (ecomplete-setup)))

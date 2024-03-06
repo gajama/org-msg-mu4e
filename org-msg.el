@@ -1502,7 +1502,9 @@ HTML emails."
   (add-hook 'message-send-hook (lambda () (let ((inhibit-read-only t))
 					    (remove-text-properties
 					     (point-min) (point-max)
-					     '(read-only nil intangible nil)))) 0 t))
+					     '(read-only nil intangible
+							 nil)))) 0 t)
+  (add-hook 'message-sent-hook #'widen -90 t))
   ;(add-hook 'after-save-hook #'mu4e--delimit-headers 0 t))
   ;; the following code is verbatim from mu4e-compose.el, `mu4e-compose-mode'
   ;; this will setup fcc (saving sent messages) and handle flags
@@ -1562,7 +1564,7 @@ Type \\[org-msg-attach] to call the dispatcher for attachment
 \\{org-msg-edit-mode-map}"
   (setq-local message-sent-message-via nil)
   (add-hook 'message-send-hook 'org-msg-prepare-to-send nil t)
-  ;(add-hook 'message-sent-hook 'undo t t)
+  (add-hook 'message-sent-hook 'undo t t)
   (add-hook 'completion-at-point-functions 'message-completion-function nil t)
   (cond ((message-mail-alias-type-p 'abbrev) (mail-abbrevs-setup))
 	((message-mail-alias-type-p 'ecomplete) (ecomplete-setup)))

@@ -1499,8 +1499,10 @@ HTML emails."
     (org-msg--mu4e-fun-call "start"))
   (when mu4e-compose-complete-addresses
     (org-msg--mu4e-fun-call "compose-setup-completion"))
-  (add-hook 'message-send-hook (lambda () (mu4e--delimit-headers
-					  'undelimit)) 0 t))
+  (add-hook 'message-send-hook (lambda () (let ((inhibit-read-only t))
+					    (remove-text-properties
+					     (point-min) (point-max)
+					     '(read-only nil intangible nil)))) 0 t))
   ;(add-hook 'after-save-hook #'mu4e--delimit-headers 0 t))
   ;; the following code is verbatim from mu4e-compose.el, `mu4e-compose-mode'
   ;; this will setup fcc (saving sent messages) and handle flags
